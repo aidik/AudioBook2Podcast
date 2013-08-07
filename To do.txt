@@ -2,7 +2,7 @@ IP ne localhost - DONE
 Správně vypnout webserver - DONE
 Změnit texty
 Přidat episode picture - výběr barvy pozadí (def transaprent)
-Webserver jako dll pokud to jde - zatím mě to ale nepálí
+Webserver jako dll pokud to jde - zatím mě to ale nepálí mongoose
 QR generator - DONE
 
 Create podcast je klikací i když není vybraná cesta....
