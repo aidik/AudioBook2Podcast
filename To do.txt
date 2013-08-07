@@ -1,0 +1,4 @@
+IP ne localhost
+Správně vypnout webserver
+Změnit texty
+Přidat episode picture - výběr barvy pozadí (def transaprent)
