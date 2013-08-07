@@ -12,6 +12,9 @@ using System.Web;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
+using Gma.QrCodeNet.Encoding.Windows.Forms;
 
 namespace AudioBook2Podcast
 {
@@ -20,21 +23,39 @@ namespace AudioBook2Podcast
         public static DateTime date = DateTime.UtcNow;
 
         public static string path = "";
-        public static string adresa = "http://localhost:";
+        public static string adresa = "http://" + LocalhostIP() + ":";
         public static Size s = new Size(144, 144);
         public static string cesta = Application.StartupPath;
         public static string aport;
         public static Process LightTPD;
+        
 
 
 
         public Form1()
         {
             InitializeComponent();
+
             
 
         }
 
+
+        public static string LocalhostIP()
+        {
+            IPHostEntry host;
+            string localIP = "";
+            host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    localIP = ip.ToString();
+                    break;
+                }
+            }
+            return localIP;
+        }
 
         public static string ObracenaLomitka(string s)
         {
@@ -52,7 +73,7 @@ namespace AudioBook2Podcast
             startInfo.UseShellExecute = false;
             startInfo.FileName = cesta + @"\LightTPD\lighttpd.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = "-f " + ObracenaLomitka(cesta) + "/LightTPD/conf/lighttpd-inc.conf -m lib"; //- D ukaze okno od LightTPD
+            startInfo.Arguments = "-f /LightTPD/conf/lighttpd-inc.conf -m lib -D"; // -D shows LightTPD window
 
             LightTPD = Process.Start(startInfo);
             
@@ -94,7 +115,7 @@ namespace AudioBook2Podcast
                 }
                 catch
                 {
-                    MessageBox.Show("While loading image " + ofd.FileName + " occured an error. File is probably damaged.", "Image load", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("While loading image " + ofd.FileName + " an error occured. File is probably damaged.", "Image load", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -202,6 +223,8 @@ namespace AudioBook2Podcast
 
         }
 
+
+
         private void button3_Click(object sender, EventArgs e)
         {
             ImageFormat format = ImageFormat.Jpeg;
@@ -215,6 +238,7 @@ namespace AudioBook2Podcast
             podcast();
             RunLightTPD();
             textBox4.Text = adresa + aport + "/podcast.xml";
+            qrCodeGraphicControl1.Text = textBox4.Text;
             
         }
 
@@ -282,6 +306,19 @@ namespace AudioBook2Podcast
             return (Image)b;
         }
 
+        private static void KillWS()
+        {
+            Process[] prs = Process.GetProcesses();
+            foreach (Process pr in prs)
+            {
+                
+                if (pr.ProcessName == "LightTPD")
+                {
+                    pr.Kill();
+                }
+            }
+        }
+
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
@@ -302,6 +339,7 @@ namespace AudioBook2Podcast
         {
             try
             {
+                KillWS();
                 LightTPD.Kill();
             }
             catch
@@ -321,6 +359,7 @@ namespace AudioBook2Podcast
             AboutBox1 ab1 = new AboutBox1();
             ab1.ShowDialog();
         }
+
 
 
 
