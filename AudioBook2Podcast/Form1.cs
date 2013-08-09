@@ -26,20 +26,12 @@ namespace AudioBook2Podcast
         public static string adresa = "http://" + LocalhostIP() + ":";
         public static Size s = new Size(144, 144);
         public static string cesta = Application.StartupPath;
-        public static string aport;
-        public static Process LightTPD;
-        
-
-
+        public static int aport;
 
         public Form1()
         {
             InitializeComponent();
-
-            
-
         }
-
 
         public static string LocalhostIP()
         {
@@ -57,32 +49,13 @@ namespace AudioBook2Podcast
             return localIP;
         }
 
-        public static string ObracenaLomitka(string s)
+        public static void RunUWS()
         {
-            s = s.Replace("\\", "/");
-            return s;
+            UhttpShartServer uws = new UhttpShartServer();
+            uws.path = path;
+            uws.port = aport;
+            uws.Start();
         }
-
-        public static void RunLightTPD()
-        {
-
-
-            
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.CreateNoWindow = false;
-            startInfo.UseShellExecute = false;
-            startInfo.FileName = cesta + @"\LightTPD\lighttpd.exe";
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = "-f /LightTPD/conf/lighttpd-inc.conf -m lib -D"; // -D shows LightTPD window
-
-            LightTPD = Process.Start(startInfo);
-            
-
-        }
-
-
-       
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -93,8 +66,6 @@ namespace AudioBook2Podcast
             {
                 label5.Text = fbd.SelectedPath;
                 path = label5.Text;
-                
-
             }   
         }
 
@@ -118,8 +89,6 @@ namespace AudioBook2Podcast
                     MessageBox.Show("While loading image " + ofd.FileName + " an error occured. File is probably damaged.", "Image load", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-            
         }
 
 
@@ -213,12 +182,6 @@ namespace AudioBook2Podcast
             podcast.WriteLine("  </channel>");
             podcast.WriteLine("</rss>");
 
-
-
-
-
-
-
             podcast.Close();
 
         }
@@ -233,38 +196,24 @@ namespace AudioBook2Podcast
             Image i = resizeImage(pictureBox1.Image,  s);
             i.Save(path + "\\" + "podcast.jpg", format);
            
-            
-            UpravConfig();
+            aport = DejPort();
             podcast();
-            RunLightTPD();
+            RunUWS();
             textBox4.Text = adresa + aport + "/podcast.xml";
             qrCodeGraphicControl1.Text = textBox4.Text;
             
         }
 
-        private static void UpravConfig()
-        {
-            aport = DejPort();
-            StreamReader sr = new StreamReader("lighttpd-inc.conf");
-            string config = sr.ReadToEnd();
-            config = config.Replace("{{DR}}", ObracenaLomitka(path));
-            config = config.Replace("{{TMP}}", ObracenaLomitka(cesta) + "/LightTPD/TMP/");
-            config = config.Replace("{{PORT}}", aport);
-            StreamWriter sw = new StreamWriter(@"LightTPD/conf/lighttpd-inc.conf", false);
-            sw.Write(config);
-            sw.Close();
-            sw.Dispose(); 
 
 
-
-        }
-
-        private static string DejPort()
+        private static int DejPort()
         {
             if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"/port.set"))
             {
                 StreamReader sr = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"/port.set");
-                string port = sr.ReadLine();
+                string line = sr.ReadLine();
+                int port = Convert.ToInt16(line);
+
                 sr.Close();
                 return port;
             }
@@ -272,7 +221,7 @@ namespace AudioBook2Podcast
             {
                 Random rnd = new Random();
                 int nport = rnd.Next(49153, 65534);
-                return nport.ToString();
+                return nport;
             }
         }
 
@@ -306,19 +255,6 @@ namespace AudioBook2Podcast
             return (Image)b;
         }
 
-        private static void KillWS()
-        {
-            Process[] prs = Process.GetProcesses();
-            foreach (Process pr in prs)
-            {
-                
-                if (pr.ProcessName == "LightTPD")
-                {
-                    pr.Kill();
-                }
-            }
-        }
-
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
@@ -337,21 +273,12 @@ namespace AudioBook2Podcast
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
-            {
-                KillWS();
-                LightTPD.Kill();
-            }
-            catch
-            { }
             Environment.Exit(0);
-
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form1_FormClosing(null, null);
-
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

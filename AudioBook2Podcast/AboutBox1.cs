@@ -18,15 +18,25 @@ namespace AudioBook2Podcast
             this.label2.Text = String.Format("Version {0}", AssemblyVersion);
             this.label3.Text = AssemblyCopyright;
 
-            string dsc = "Copyright (c) 2010 Václav Navrátil <vaclav.navratil@gmail.com>\r\n";
+            string dsc = "Copyright (c) 2010-2013 Václav Navrátil <vaclav.navratil@gmail.com>\r\n";
             dsc += "All rights reserved.\r\n\r\n";
             dsc += "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\r\n\r\n\r\n";
             dsc += "1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\r\n\r\n";
             dsc += "2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\r\n\r\n\r\n";
             dsc += "THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.";
+            dsc += "\r\n\r\n\r\n\r\n";
+            dsc += "This software is also dependent upon the work of others. I used two different libraries which are published under different licenses:";
+            dsc += "\r\n\r\n";
+            dsc += "Fantastic and easy to use QR Code generator library QrCode.Net created by George Mamaladze and available from http://qrcodenet.codeplex.com/ under the MIT License.";
+            dsc += "\r\n\r\n";
+            dsc += "A very lightweight & simple embedded http server for c# uhttpsharp created by uhttpsharp project and available from https://github.com/raistlinthewiz/uhttpsharp under the GNU Lesser General Public License version 2.1 or any later version.";
+
 
             
             this.textBox1.Text = dsc;
+            this.textBox1.DeselectAll();
+            this.textBox1.Select(0, 5);
+            this.textBox1.DeselectAll();
 
             
 
