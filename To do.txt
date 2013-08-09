@@ -1,9 +1,4 @@
-IP ne localhost - DONE
-Správně vypnout webserver - DONE
 Změnit texty
-Přidat episode picture - výběr barvy pozadí (def transaprent)
-Webserver jako dll pokud to jde - zatím mě to ale nepálí mongoose
-QR generator - DONE
-
+Přidat lepší resize obrázku - stejná velikost 144×144 a transparentní pozadí (specifikace možná povolují jen jpg)
 Create podcast je klikací i když není vybraná cesta....
 
