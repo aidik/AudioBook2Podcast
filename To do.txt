@@ -2,3 +2,5 @@ Změnit texty
 Přidat lepší resize obrázku - stejná velikost 144×144 a transparentní pozadí (specifikace možná povolují jen jpg)
 Create podcast je klikací i když není vybraná cesta....
 
+Vlastní web
+A správná distribuce
