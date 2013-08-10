@@ -70,7 +70,7 @@ namespace AudioBook2Podcast
         public override HttpResponse Handle(HttpRequest httpRequest)
         {
             var httpRoot = Path.GetFullPath(HttpRootDirectory ?? ".");
-            var requestPath = httpRequest.Uri.AbsolutePath.TrimStart('/');
+            var requestPath = Uri.UnescapeDataString(httpRequest.Uri.AbsolutePath.TrimStart('/'));
             var path = Path.GetFullPath(Path.Combine(httpRoot, requestPath));
             if (!File.Exists(path))
                 return null;
