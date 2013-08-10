@@ -17,13 +17,14 @@
     <GenerateManifests>true</GenerateManifests>
     <TargetZone>LocalIntranet</TargetZone>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <PublishUrl>C:\Users\Shogun-San\Desktop\AB2P\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -34,12 +35,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <TargetCulture>en</TargetCulture>
+    <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>0.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -159,6 +162,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -177,16 +185,16 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5</ProductName>
-      <Install>true</Install>
+      <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
       <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
+      <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
