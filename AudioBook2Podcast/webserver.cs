@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using uhttpsharp;
 
 namespace AudioBook2Podcast
 {
-    class UhttpShartServer
+    public class UhttpShartServer
     {
         public string path { get; set; }
         public int port { get; set; }
@@ -19,6 +20,12 @@ namespace AudioBook2Podcast
             FileHandler.HttpRootDirectory = path;
             IndexHandler.Resp = File.ReadAllText(path + "/podcast.xml");
             HttpServer.Instance.StartUp();
+            
+        }
+
+        public void Stop()
+        {
+            HttpServer.Instance.Stop();
         }
     }
 
@@ -45,27 +52,13 @@ namespace AudioBook2Podcast
         static FileHandler()
         {
             DefaultMimeType = "application/rss+xml";
-            MimeTypes = new Dictionary<string, string>
-                            {
-                                {".css", "text/css"},
-                                {".gif", "image/gif"},
-                                {".htm", "text/html"},
-                                {".html", "text/html"},
-                                {".jpg", "image/jpeg"},
-                                {".js", "application/javascript"},
-                                {".png", "image/png"},
-                                {".xml", "application/rss+xml"},
-                                {".mp3", "audio/mpeg"},
-                                {".wma", "audio/x-ms-wma"}
-                            };
         }
 
         private string GetContentType(string path)
         {
-            var extension = Path.GetExtension(path) ?? "";
-            if (MimeTypes.ContainsKey(extension))
-                return MimeTypes[extension];
-            return DefaultMimeType;
+
+            return MIMEAssistant.GetMIMEType(Path.GetFileName(path), DefaultMimeType);
+
         }
         public override HttpResponse Handle(HttpRequest httpRequest)
         {

@@ -99,7 +99,8 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "mp3",
-            "wma"});
+            "wma",
+            "all"});
             this.comboBox1.Location = new System.Drawing.Point(88, 213);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(62, 21);
@@ -208,8 +209,10 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(396, 82);
             this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(116, 20);
             this.textBox4.TabIndex = 17;
+            this.textBox4.Text = "http://aidik.com";
             // 
             // menuStrip1
             // 
@@ -266,6 +269,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.LightGreen;
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(396, 216);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(116, 27);
@@ -321,6 +325,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "AudioBook2Podcast";

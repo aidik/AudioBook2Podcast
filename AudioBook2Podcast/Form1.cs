@@ -26,6 +26,8 @@ namespace AudioBook2Podcast
         public static Size s = new Size(144, 144);
         public static string cesta = Application.StartupPath;
         public static int aport;
+        public static UhttpShartServer uws = new UhttpShartServer();
+        public static bool running;
 
         public Form1()
         {
@@ -50,10 +52,17 @@ namespace AudioBook2Podcast
 
         public static void RunUWS()
         {
-            UhttpShartServer uws = new UhttpShartServer();
+            if (running)
+            {
+                uws.Stop();
+            }
+            
             uws.path = path;
             uws.port = aport;
             uws.Start();
+            running = true;
+            
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -65,6 +74,7 @@ namespace AudioBook2Podcast
             {
                 label5.Text = fbd.SelectedPath;
                 path = label5.Text;
+                button3.Enabled = true;
             }   
         }
 
@@ -107,14 +117,26 @@ namespace AudioBook2Podcast
             DirectoryInfo di = new DirectoryInfo(path);
 
             FileInfo[] fi = null;
-            if (comboBox1.Text == "")
+
+
+
+            switch (comboBox1.Text)
             {
-                fi = di.GetFiles();
+                case "": //if the combobox is empty use mp3
+                    fi = di.GetFiles("*.mp3");
+                    break;
+
+                case "all": //do all files
+                    fi = di.GetFiles();
+                    break;
+                
+                default:
+                    {
+                        fi = di.GetFiles("*." + comboBox1.Text);
+                        break;
+                    }
             }
-            else
-            {
-                fi = di.GetFiles("*." + comboBox1.Text);
-            }
+            
 
             Array.Sort<FileInfo>(fi, new Comparison<FileInfo>(delegate(FileInfo d1, FileInfo d2)
             {
@@ -171,7 +193,7 @@ namespace AudioBook2Podcast
                 podcast.WriteLine("    <pubDate>" + gooddate + "</pubDate>");
                 podcast.WriteLine("    <guid>" + adresa + aport + "/" + Uri.EscapeDataString(f.ToString()) + "</guid>");
                 podcast.WriteLine("   <author>" + args[6] + "</author>");
-                podcast.WriteLine("   <enclosure url=\"" + adresa + aport + "/" + Uri.EscapeDataString(f.ToString()) + "\" " + "length=\"" + f.Length + "\"  type=\"audio/mpeg\" />");
+                podcast.WriteLine("   <enclosure url=\"" + adresa + aport + "/" + Uri.EscapeDataString(f.ToString()) + "\" " + "length=\"" + f.Length + "\"  type=\"" + MIMEAssistant.GetMIMEType(f.ToString()) + "\" />");
                 podcast.WriteLine("   </item>");
                 cislo++;
 
@@ -262,7 +284,14 @@ namespace AudioBook2Podcast
 
         private void button2_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(textBox4.Text);
+            try
+            {
+                System.Diagnostics.Process.Start(textBox4.Text);
+            }
+            catch
+            {
+                MessageBox.Show("The URL is not valid.", "Open in browser.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
