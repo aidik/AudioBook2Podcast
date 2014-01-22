@@ -20,7 +20,7 @@ namespace AudioBook2Podcast
             FileHandler.HttpRootDirectory = path;
             IndexHandler.Resp = File.ReadAllText(path + "/podcast.xml");
             HttpServer.Instance.StartUp();
-            
+
         }
 
         public void Stop()

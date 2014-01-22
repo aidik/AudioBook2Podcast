@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioBook2Podcast", "AudioBook2Podcast\AudioBook2Podcast.csproj", "{BD613E62-D57C-49BA-B406-0FCBFDEA48F4}"
 EndProject
 Global

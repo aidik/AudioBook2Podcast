@@ -17,8 +17,9 @@ namespace AudioBook2Podcast
             this.label1.Text = AssemblyProduct;
             this.label2.Text = String.Format("Version {0}", AssemblyVersion);
             this.label3.Text = AssemblyCopyright;
+            DateTime date = DateTime.Now;
 
-            string dsc = "Copyright (c) 2010-2013 Václav Navrátil <vaclav.navratil@gmail.com>\r\n";
+            string dsc = "Copyright (c) 2010-" + date.Year + " Václav Navrátil <vaclav.navratil@gmail.com>\r\n";
             dsc += "All rights reserved.\r\n\r\n";
             dsc += "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\r\n\r\n\r\n";
             dsc += "1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\r\n\r\n";

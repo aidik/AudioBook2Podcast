@@ -17,6 +17,7 @@ using Gma.QrCodeNet.Encoding.Windows.Forms;
 
 namespace AudioBook2Podcast
 {
+
     public partial class Form1 : Form
     {
         public static DateTime date = DateTime.UtcNow;
@@ -26,7 +27,7 @@ namespace AudioBook2Podcast
         public static Size s = new Size(144, 144);
         public static string cesta = Application.StartupPath;
         public static int aport;
-        public static UhttpShartServer uws = new UhttpShartServer();
+        //public static UhttpShartServer uws = new UhttpShartServer();
         public static bool running;
 
         public Form1()
@@ -54,12 +55,10 @@ namespace AudioBook2Podcast
         {
             if (running)
             {
-                uws.Stop();
+                Uws.Instance.Reset();
             }
-            
-            uws.path = path;
-            uws.port = aport;
-            uws.Start();
+
+            Uws.Instance.Start(path, aport);
             running = true;
             
             
@@ -75,6 +74,7 @@ namespace AudioBook2Podcast
                 label5.Text = fbd.SelectedPath;
                 path = label5.Text;
                 button3.Enabled = true;
+                button3.BackColor = Color.LightGreen;
             }   
         }
 
@@ -212,6 +212,19 @@ namespace AudioBook2Podcast
         private void button3_Click(object sender, EventArgs e)
         {
             ImageFormat format = ImageFormat.Jpeg;
+            button1.Enabled = false;
+            button3.Enabled = false;
+            ObrCesta.Enabled = false;
+            textBox1.Enabled = false;
+            textBox2.Enabled = false;
+            textBox3.Enabled = false;
+            comboBox1.Enabled = false;
+
+            button1.BackColor = Color.Tomato;
+            button3.BackColor = Color.Tomato;
+            ObrCesta.BackColor = Color.Tomato;
+            button2.BackColor = Color.LightGreen;
+            button4.BackColor = Color.LightGreen;
 
             path = label5.Text;
             Image i = resizeImage(pictureBox1.Image,  s);
@@ -319,4 +332,25 @@ namespace AudioBook2Podcast
 
 
     }
+
+    class Uws
+    {
+        public static Uws Instance = new Uws();
+
+        public void Reset()
+        {
+            Instance = new Uws();
+        }
+
+        public void Start(string path, int aport)
+        {
+            UhttpShartServer Server = new UhttpShartServer();
+            Server.path = path;
+            Server.port = aport;
+            Server.Start();
+        }
+
+
+    }
+
 }
