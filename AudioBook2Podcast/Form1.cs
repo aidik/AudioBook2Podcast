@@ -189,7 +189,7 @@ namespace AudioBook2Podcast
                 podcast.WriteLine("    <title>" + titulek + "</title>");
                 podcast.WriteLine("    <link>" + adresa + aport + "/" + Uri.EscapeDataString(f.ToString()) + "</link>");
                 podcast.WriteLine("    <comments>http://www.aidik.com/</comments>");
-                podcast.WriteLine("    <description>" + cislo.ToString() + ". part of book " + args[1] + " from " + args[6] + ".</description>");
+                podcast.WriteLine("    <description>" + cislo.ToString() + ". part of book " + args[1] + " by " + args[6] + ".</description>");
                 podcast.WriteLine("    <pubDate>" + gooddate + "</pubDate>");
                 podcast.WriteLine("    <guid>" + adresa + aport + "/" + Uri.EscapeDataString(f.ToString()) + "</guid>");
                 podcast.WriteLine("   <author>" + args[6] + "</author>");
