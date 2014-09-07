@@ -90,7 +90,7 @@ namespace AudioBook2Podcast
             {
                 try
                 {
-                    pictureBox1.Image = resizeImage(Image.FromFile(ofd.FileName), s);
+                    pictureBox1.Image = Image.FromFile(ofd.FileName);
                     
                 }
                 catch
@@ -108,11 +108,12 @@ namespace AudioBook2Podcast
             string[] args = { "", //slozka
                               textBox1.Text, //jmeno podcastu - knihy
                               textBox2.Text, //popisek
-                              "podcast.jpg", //obrazek
+                              "podcast.png", //obrazek
                               "144", //vyska obrazku drzet na 144
                               "144", //sirka drzet tez na 144
                               textBox3.Text, // autor
                               "podcast.xml", //vystup podcast feed
+                              "itunes_podcast.png" //obrazek do itunes:image tagu
                             };
             DirectoryInfo di = new DirectoryInfo(path);
 
@@ -165,6 +166,10 @@ namespace AudioBook2Podcast
             podcast.WriteLine("     <title>" + args[1] + "</title>");
             podcast.WriteLine("   </image>");
             podcast.WriteLine();
+
+            podcast.WriteLine("   <itunes:image href=\"" + adresa + aport + "/" + args[8] + "\" />");
+
+            podcast.WriteLine();
             podcast.WriteLine("   <copyright>AudioBook2Podcast</copyright>");
             podcast.WriteLine("   <language>en-GB</language>");
             podcast.WriteLine("   <docs>http://blogs.law.harvard.edu/tech/rss</docs>");
@@ -211,7 +216,7 @@ namespace AudioBook2Podcast
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ImageFormat format = ImageFormat.Jpeg;
+            ImageFormat format = ImageFormat.Png;
             button1.Enabled = false;
             button3.Enabled = false;
             ObrCesta.Enabled = false;
@@ -227,8 +232,10 @@ namespace AudioBook2Podcast
             button4.BackColor = Color.LightGreen;
 
             path = label5.Text;
-            Image i = resizeImage(pictureBox1.Image,  s);
-            i.Save(path + "\\" + "podcast.jpg", format);
+            Image[] i = resizeImage(pictureBox1.Image,  s);
+            i[0].Save(path + "\\" + "podcast.png", format);
+            i[1].Save(path + "\\" + "itunes_podcast.png", format);
+
            
             aport = DejPort();
             podcast();
@@ -259,8 +266,12 @@ namespace AudioBook2Podcast
             }
         }
 
-        private static Image resizeImage(Image imgToResize, Size size)
+        //We need to get a squared picture with original size and one squared at 144×144 px.
+
+        private static Image[] resizeImage(Image imgToResize, Size size)
         {
+            Image[] covers = new Image[2];
+
             int sourceWidth = imgToResize.Width;
             int sourceHeight = imgToResize.Height;
 
@@ -279,14 +290,41 @@ namespace AudioBook2Podcast
             int destWidth = (int)(sourceWidth * nPercent);
             int destHeight = (int)(sourceHeight * nPercent);
 
-            Bitmap b = new Bitmap(destWidth, destHeight);
-            Graphics g = Graphics.FromImage((Image)b);
+            Bitmap background = new Bitmap(size.Width, size.Height);
+            Graphics g = Graphics.FromImage(background);
+            g.Clear(Color.Transparent);
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
+            g.DrawImage(imgToResize, (size.Width - destWidth) / 2, (size.Height - destHeight) / 2, destWidth, destHeight);
+            g.Flush();
             g.Dispose();
 
-            return (Image)b;
+            
+            covers[0] = background;
+
+            int squareSize;
+
+            if (sourceHeight < sourceWidth)
+                squareSize = sourceWidth;
+            else
+                squareSize = sourceHeight;
+
+
+            Bitmap backgroundIT = new Bitmap(squareSize, squareSize);
+            Graphics gIT = Graphics.FromImage(backgroundIT);
+            gIT.Clear(Color.Transparent);
+
+            gIT.DrawImage(imgToResize, (squareSize - sourceWidth) / 2, (squareSize - sourceHeight) / 2, sourceWidth, sourceHeight);
+            gIT.Flush();
+            gIT.Dispose();
+
+            covers[1] = backgroundIT;
+
+
+            
+            
+            
+            return covers;
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)

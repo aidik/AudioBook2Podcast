@@ -84,10 +84,10 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(93, 38);
+            this.textBox1.Location = new System.Drawing.Point(97, 39);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(197, 22);
+            this.textBox1.Size = new System.Drawing.Size(194, 20);
             this.textBox1.TabIndex = 2;
             // 
             // textBox2
@@ -105,11 +105,12 @@
             this.comboBox1.Items.AddRange(new object[] {
             "mp3",
             "wma",
+            "m4a",
             "all"});
-            this.comboBox1.Location = new System.Drawing.Point(120, 239);
+            this.comboBox1.Location = new System.Drawing.Point(97, 235);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(81, 24);
+            this.comboBox1.Size = new System.Drawing.Size(81, 21);
             this.comboBox1.TabIndex = 4;
             // 
             // pictureBox1
@@ -119,6 +120,7 @@
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(144, 144);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
@@ -128,16 +130,16 @@
             this.label1.Location = new System.Drawing.Point(16, 70);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 17);
+            this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Author";
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(93, 67);
+            this.textBox3.Location = new System.Drawing.Point(97, 67);
             this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(197, 22);
+            this.textBox3.Size = new System.Drawing.Size(194, 20);
             this.textBox3.TabIndex = 8;
             // 
             // label2
@@ -146,7 +148,7 @@
             this.label2.Location = new System.Drawing.Point(16, 38);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 17);
+            this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Name";
             // 
@@ -156,7 +158,7 @@
             this.label3.Location = new System.Drawing.Point(17, 95);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 17);
+            this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 10;
             this.label3.Text = "Description";
             // 
@@ -166,7 +168,7 @@
             this.label4.Location = new System.Drawing.Point(305, 38);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.Size = new System.Drawing.Size(36, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "Image";
             // 
@@ -176,7 +178,7 @@
             this.label5.Location = new System.Drawing.Point(168, 306);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(131, 17);
+            this.label5.Size = new System.Drawing.Size(99, 13);
             this.label5.TabIndex = 12;
             this.label5.Text = "path is not selected";
             // 
@@ -197,7 +199,7 @@
             this.label6.Location = new System.Drawing.Point(17, 239);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(95, 17);
+            this.label6.Size = new System.Drawing.Size(72, 13);
             this.label6.TabIndex = 14;
             this.label6.Text = "File Extension";
             // 
@@ -218,7 +220,7 @@
             this.label7.Location = new System.Drawing.Point(471, 67);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 17);
+            this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 16;
             this.label7.Text = "Podcast url";
             // 
@@ -228,7 +230,7 @@
             this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(153, 22);
+            this.textBox4.Size = new System.Drawing.Size(153, 20);
             this.textBox4.TabIndex = 17;
             this.textBox4.Text = "http://aidik.com";
             // 
@@ -241,28 +243,28 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(898, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(898, 24);
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(45, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -295,13 +297,13 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label8.Location = new System.Drawing.Point(324, 67);
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label8.Location = new System.Drawing.Point(316, 67);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(128, 12);
+            this.label8.Size = new System.Drawing.Size(126, 9);
             this.label8.TabIndex = 24;
-            this.label8.Text = " will be resized to 144 × 144 px";
+            this.label8.Text = "Picture below will be resized nicely.";
             // 
             // label9
             // 
@@ -309,7 +311,7 @@
             this.label9.Location = new System.Drawing.Point(646, 38);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(66, 17);
+            this.label9.Size = new System.Drawing.Size(51, 13);
             this.label9.TabIndex = 27;
             this.label9.Text = "QR Code";
             // 
