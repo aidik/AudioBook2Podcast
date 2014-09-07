@@ -174,7 +174,7 @@ namespace AudioBook2Podcast
             podcast.WriteLine("   <language>en-GB</language>");
             podcast.WriteLine("   <docs>http://blogs.law.harvard.edu/tech/rss</docs>");
             podcast.WriteLine("   <generator>AudioBook2Podcast</generator>");
-            podcast.WriteLine("   <itunes:image href=\"" + adresa + aport + "/" + args[3] + "\"/>");
+            //podcast.WriteLine("   <itunes:image href=\"" + adresa + aport + "/" + args[3] + "\"/>");
             podcast.WriteLine();
             podcast.WriteLine();
 
